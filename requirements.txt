@@ -1,1 +1,4 @@
-Flask==2.2.2
+Flask
+Werkzeug
+flake8 >= 3.0.0
+pytest >=8.3.0
