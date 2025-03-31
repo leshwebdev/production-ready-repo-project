@@ -38,4 +38,5 @@ jobs:
     - name: Run pytest
       run: |
         . venv/bin/activate
-        pytest --maxfail=1 --disable-warnings -q  # You can adjust these flags as needed
+        export PYTHONPATH=$(pwd)/microservices/service1  # Set the PYTHONPATH to the directory where 'app' is located
+        pytest --maxfail=1 --disable-warnings -q
