@@ -1,0 +1,41 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Use the Python version that you need
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        . venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run flake8 for linting
+      run: |
+        . venv/bin/activate
+        flake8 . --max-line-length=79  # or configure other options as necessary
+
+    - name: Run pytest
+      run: |
+        . venv/bin/activate
+        pytest --maxfail=1 --disable-warnings -q  # You can adjust these flags as needed
